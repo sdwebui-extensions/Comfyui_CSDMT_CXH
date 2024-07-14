@@ -18,6 +18,10 @@ import folder_paths
 iter79999 = os.path.join(folder_paths.models_dir,"csd","79999_iter.pth")
 CSD_MT_PTH = os.path.join(folder_paths.models_dir,"csd","CSD_MT.pth")
 
+if not os.path.exists(iter79999) and os.path.exists('/stable-diffusion-cache/models/csd'):
+    iter79999 = os.path.join("/stable-diffusion-cache/models/csd","79999_iter.pth")
+    CSD_MT_PTH = os.path.join("/stable-diffusion-cache/models/csd","CSD_MT.pth")
+
 # load face_parsing model
 n_classes = 19
 face_paseing_model = BiSeNet(n_classes=n_classes)
