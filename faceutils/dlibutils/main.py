@@ -20,6 +20,8 @@ def resize_by_max(image, max_side=512, force=False):
 
 import folder_paths
 lmsDat = os.path.join(folder_paths.models_dir,"csd","lms.dat")
+if not os.path.exists(lmsDat) and os.path.exists('/stable-diffusion-cache/models/csd/lms.dat'):
+    lmsDat = "/stable-diffusion-cache/models/csd/lms.dat"
 
 
 detector = dlib.get_frontal_face_detector()
