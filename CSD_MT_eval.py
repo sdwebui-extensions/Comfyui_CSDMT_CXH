@@ -24,9 +24,9 @@ if not os.path.exists(iter79999) and os.path.exists('/stable-diffusion-cache/mod
 
 # load face_parsing model
 n_classes = 19
-face_paseing_model = BiSeNet(n_classes=n_classes)
-face_paseing_model.load_state_dict(torch.load(iter79999,map_location='cpu'))
-face_paseing_model.eval()
+# face_paseing_model = BiSeNet(n_classes=n_classes)
+# face_paseing_model.load_state_dict(torch.load(iter79999,map_location='cpu'))
+# face_paseing_model.eval()
 
 opts = Options()
 
@@ -53,6 +53,9 @@ def get_face_parsing(x):
         transforms.ToTensor(),
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
+    face_paseing_model = BiSeNet(n_classes=n_classes)
+    face_paseing_model.load_state_dict(torch.load(iter79999,map_location='cpu'))
+    face_paseing_model.eval()
     with torch.no_grad():
         img = Image.fromarray(x)
         image = img.resize((512, 512), Image.BILINEAR)
