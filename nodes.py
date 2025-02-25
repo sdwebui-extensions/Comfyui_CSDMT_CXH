@@ -1,16 +1,3 @@
-
-import cv2
-import numpy as np  
-from .lib.ximg import *
-
-
-from .CSD_MT_eval import makeup_transfer256
-
-def get_makeup_transfer_results256(non_makeup_img,makeup_img,reszie,inittype):
-    transfer_img=makeup_transfer256(non_makeup_img,makeup_img,reszie,inittype)
-    return transfer_img
-
-
 class CSD:
 
     def __init__(self):
@@ -34,12 +21,15 @@ class CSD:
     CATEGORY = "CXH"
 
     def gen(self, sources,makeup,reszie,inittype):
+        from .CSD_MT_eval import makeup_transfer256
+        from .lib.ximg import *
+
         mask_results = []
         makeup_img = np.clip(255.0 * makeup.cpu().numpy().squeeze(), 0, 255).astype(np.uint8) #tensor2pil(makeup)
 
         for img in sources:
             non_makeup_img = np.clip(255.0 * img.cpu().numpy().squeeze(), 0, 255).astype(np.uint8) #tensor2pil(img)
-            resp = get_makeup_transfer_results256(non_makeup_img,makeup_img,reszie,inittype)
+            resp = makeup_transfer256(non_makeup_img,makeup_img,reszie,inittype)
                 
             mask_results.append(pil2tensor(resp))   
 
