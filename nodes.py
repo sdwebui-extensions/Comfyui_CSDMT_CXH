@@ -1,3 +1,5 @@
+from .lib.ximg import *
+
 class CSD:
 
     def __init__(self):
@@ -22,7 +24,6 @@ class CSD:
 
     def gen(self, sources,makeup,reszie,inittype):
         from .CSD_MT_eval import makeup_transfer256
-        from .lib.ximg import *
 
         mask_results = []
         makeup_img = np.clip(255.0 * makeup.cpu().numpy().squeeze(), 0, 255).astype(np.uint8) #tensor2pil(makeup)
